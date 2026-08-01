@@ -1,0 +1,21 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // SOS requests collection
+    // - WRITES: only via the backend (Admin SDK bypasses these rules entirely)
+    // - READS: a user can read their own SOS documents only
+    //   (needed for the frontend's onSnapshot realtime status listener)
+    match /sos_requests/{sosId} {
+      allow read: if request.auth != null
+                  && request.auth.uid == resource.data.uid;
+      allow write: if false; // all writes go through backend Admin SDK
+    }
+
+    // Deny everything else by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

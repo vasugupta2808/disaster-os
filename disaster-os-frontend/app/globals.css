@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens, defined as CSS variables and consumed by tailwind.config.ts.
+ *
+ * Why CSS variables instead of hardcoding colors in Tailwind config directly:
+ * it lets the *same* utility class (e.g. `bg-background`) resolve to a
+ * different actual color in light vs dark mode, just by toggling the
+ * `.dark` class on <html>. No component needs `dark:bg-slate-900` style
+ * conditionals scattered everywhere.
+ *
+ * Palette direction: Apple / Stripe / Linear inspired - true neutral grays
+ * (not navy-tinted), generous whitespace, a single restrained indigo accent,
+ * light mode as the default first impression. The ONE deliberate exception:
+ * the severity scale (critical/high/medium/low/info) stays bold and
+ * saturated in both themes, because SOS and live alerts are the one place
+ * in this app where "calm" is the wrong instinct - those moments are
+ * designed to visually interrupt the calm baseline, not blend into it.
+ */
+
+@layer base {
+  :root {
+    --background: 0 0% 0%; /* Pitch black for SaaS theme */
+    --foreground: 0 0% 100%; /* Pure white text */
+
+    --card: 217 33% 10%; /* Dark gray card background */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 217 33% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%; /* White for primary buttons */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 217 33% 17%; /* gray-800 */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%; /* #9ca3af gray-400 */
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%; /* gray-800 */
+    --input: 217 33% 17%;
+    --ring: 217 33% 40%;
+
+    --radius: 0.5rem; /* rounded-md from template */
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 217 33% 40%;
+
+    /* Severity scale */
+    --severity-critical: 0 84% 50%;
+    --severity-high: 24 95% 53%;
+    --severity-medium: 38 92% 50%;
+    --severity-low: 142 71% 38%;
+    --severity-info: 217 91% 50%;
+
+    /* Course Design UI variables */
+    --clr-blue: #1890ff;
+    --clr-green: #01c3a8;
+    --clr-orange: #ffb741;
+    --clr-red: #a63d2a;
+    --bg-dark: #232228;
+    --bg-footer: #151419;
+    --color-white: #fff;
+    --color-gray-light: #ddd;
+    --color-gray-medium: #363636;
+    --color-gray-dark: #292929;
+    --color-gray-very-dark: #222127;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 217 33% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 217 33% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 217 33% 40%;
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 217 33% 40%;
+
+    --severity-critical: 0 84% 60%;
+    --severity-high: 24 95% 60%;
+    --severity-medium: 38 92% 58%;
+    --severity-low: 142 71% 45%;
+    --severity-info: 217 91% 65%;
+
+    /* Course Design UI variables */
+    --clr-blue: #1890ff;
+    --clr-green: #01c3a8;
+    --clr-orange: #ffb741;
+    --clr-red: #a63d2a;
+    --bg-dark: #232228;
+    --bg-footer: #151419;
+    --color-white: #fff;
+    --color-gray-light: #ddd;
+    --color-gray-medium: #363636;
+    --color-gray-dark: #292929;
+    --color-gray-very-dark: #222127;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm dark:bg-slate-950/70 dark:border-white/10;
+  }
+  .glass-card {
+    @apply bg-white/40 backdrop-blur-2xl border border-white/40 shadow-xl dark:bg-slate-900/50 dark:border-white/10;
+  }
+  .glass-panel {
+    @apply bg-background/80 backdrop-blur-lg border border-border shadow-md;
+  }
+}
+
+.glass-button-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.glass-button {
+  all: unset;
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+.dark .glass-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.glass-button-shadow {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 5;
+}

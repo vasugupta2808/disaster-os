@@ -1,0 +1,52 @@
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+firebase-service-account.json
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# uv
+.uv/
+
+# Database
+*.db
+*.sqlite3
+*.sqlite3-journal
+
+# Testing & coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
