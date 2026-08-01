@@ -404,7 +404,7 @@ function AlertCard({
 
                 <AnimatePresence>
                   {isExpanded && (
-                    <MotionP
+                    <motion.p
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
@@ -412,7 +412,7 @@ function AlertCard({
                       className="text-sm text-foreground/80 leading-relaxed overflow-hidden"
                     >
                       {alert.description}
-                    </MotionP>
+                    </motion.p>
                   )}
                 </AnimatePresence>
 
