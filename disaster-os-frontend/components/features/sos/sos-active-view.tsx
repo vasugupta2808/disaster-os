@@ -251,7 +251,7 @@ export function SosActiveView({
           <h2 className="mb-3 text-sm font-semibold text-foreground">Emergency Contacts</h2>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             {sos.guidance.emergencyNumbers.map((contact, index) => (
-              <MotionA
+              <motion.a
                 key={index}
                 href={`tel:${contact.number}`}
                 initial={{ opacity: 0, y: 4 }}
@@ -266,7 +266,7 @@ export function SosActiveView({
                   <p className="text-sm font-medium text-foreground">{contact.label}</p>
                   <p className="text-sm font-semibold text-severity-critical">{contact.number}</p>
                 </div>
-              </MotionA>
+              </motion.a>
             ))}
           </div>
         </div>
