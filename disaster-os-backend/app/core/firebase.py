@@ -48,7 +48,17 @@ def get_firebase_app() -> firebase_admin.App:
     try:
         return firebase_admin.get_app()
     except ValueError:
-        cred = credentials.Certificate(settings.FIREBASE_SERVICE_ACCOUNT_PATH)
+        import os
+        import json
+        
+        # In Render, we can't upload files easily, so we allow pasting the JSON directly into an env var
+        env_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON")
+        if env_json:
+            cred_dict = json.loads(env_json)
+            cred = credentials.Certificate(cred_dict)
+        else:
+            cred = credentials.Certificate(settings.FIREBASE_SERVICE_ACCOUNT_PATH)
+            
         return firebase_admin.initialize_app(cred, {"projectId": settings.FIREBASE_PROJECT_ID})
 
 
