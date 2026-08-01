@@ -392,14 +392,14 @@ export function ImageAnalysis() {
                   </button>
                   <AnimatePresence>
                     {showReasoning && (
-                      <MotionP
+                      <motion.p
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         className="mt-2 text-sm text-muted-foreground leading-relaxed overflow-hidden"
                       >
                         {currentResult.reasoningNote}
-                      </MotionP>
+                      </motion.p>
                     )}
                   </AnimatePresence>
                 </CardContent>
